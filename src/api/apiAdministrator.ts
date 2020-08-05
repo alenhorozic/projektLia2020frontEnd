@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { ApiConfig } from '../config/api.config';
 
-export default function api(
+export default function apiAdministrator(
     path: string,
     method: 'get' | 'post' | 'put',
     boby: any | undefined,
@@ -93,7 +93,7 @@ export default function api(
 
     async function refreshToken(
          ): Promise<string | null> {
-             const path = 'auth/user/refresh';
+             const path = 'auth/administrator/refresh';
              const data = {
                  token: getRefreshToken(),
              }

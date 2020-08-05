@@ -14,6 +14,8 @@ import AboutUsPage from './components/AboutUsPage/AboutUsPage';
 import UserLoginPage from './components/UserLoginPage/UserLoginPage';
 import AdministratorLoginPage from './components/AdministratorLoginPage/AdministratorLoginPage';
 import { HashRouter, Switch, Route } from 'react-router-dom';
+import { UserRegistrationPage } from './components/UserRegistrationPage/UserRegistrationPage';
+import { AdministratorRegistrationPage } from './components/AdministratorRegistrationPage/AdministratorRegistrationPage';
 
 const menuItems = [
   new MainMenuItem("Home","/"),
@@ -21,6 +23,8 @@ const menuItems = [
   new MainMenuItem("About us","/about-us"),
   new MainMenuItem("Log in/user","/user/login"),
   new MainMenuItem("Log in/administrator","/administrator/login"),
+  new MainMenuItem("User Registration","/administrator/registeruser"),
+  new MainMenuItem("Administrator Registration","/administrator/registeradministrator")
 ];
 
 ReactDOM.render(
@@ -33,6 +37,8 @@ ReactDOM.render(
         <Route path ="/about-us" component={ AboutUsPage } />
         <Route path ="/user/login" component={ UserLoginPage } />
         <Route path ="/administrator/login" component={ AdministratorLoginPage } />
+        <Route path ="/administrator/registeruser" component={UserRegistrationPage} />
+        <Route path ="/administrator/registeradministrator" component={AdministratorRegistrationPage} />
       </Switch>
     </HashRouter>
   </React.StrictMode>,
