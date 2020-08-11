@@ -16,6 +16,8 @@ import AdministratorLoginPage from './components/AdministratorLoginPage/Administ
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import { UserRegistrationPage } from './components/UserRegistrationPage/UserRegistrationPage';
 import { AdministratorRegistrationPage } from './components/AdministratorRegistrationPage/AdministratorRegistrationPage';
+import AdministratorHomePage from './components/AdministratorHomePage/AdministratorHomePage';
+import UserHomePage from './components/UserHomePage/UserHomePage';
 
 const menuItems = [
   new MainMenuItem("Home","/"),
@@ -23,8 +25,8 @@ const menuItems = [
   new MainMenuItem("About us","/about-us"),
   new MainMenuItem("Log in/user","/user/login"),
   new MainMenuItem("Log in/administrator","/administrator/login"),
-  new MainMenuItem("User Registration","/administrator/registeruser"),
-  new MainMenuItem("Administrator Registration","/administrator/registeradministrator")
+  //new MainMenuItem("User Registration","/administrator/registeruser"),
+  //new MainMenuItem("Administrator Registration","/administrator/registeradministrator")
 ];
 
 ReactDOM.render(
@@ -39,6 +41,8 @@ ReactDOM.render(
         <Route path ="/administrator/login" component={ AdministratorLoginPage } />
         <Route path ="/administrator/registeruser" component={UserRegistrationPage} />
         <Route path ="/administrator/registeradministrator" component={AdministratorRegistrationPage} />
+        <Route path ="/administrator/administratorhomepage" component={AdministratorHomePage} />
+        <Route path ="/user/userhomepage" component={UserHomePage} />
       </Switch>
     </HashRouter>
   </React.StrictMode>,

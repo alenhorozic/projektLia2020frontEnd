@@ -24,7 +24,7 @@ function HomePage() {
                 <Card.Title>
                  <FontAwesomeIcon icon={faUser} /> User Home Page
                 </Card.Title>
-                <Link to='/user/login'
+                <Link to='/user/userhomepage'
                 className="btn btn-primary btn-block">
                   Go To User Home Page
                 </Link>
@@ -37,7 +37,7 @@ function HomePage() {
                 <Card.Title>
                  <FontAwesomeIcon icon={faUsers} /> Administrator Home Page
                 </Card.Title>
-                <Link to='/administrator/login'
+                <Link to='/administrator/administratorhomepage'
                 className="btn  btn-primary btn-block">
                   Go To Administrator Home Page
                 </Link>

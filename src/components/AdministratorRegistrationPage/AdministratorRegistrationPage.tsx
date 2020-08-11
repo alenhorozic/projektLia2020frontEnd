@@ -96,7 +96,7 @@ export class AdministratorRegistrationPage extends React.Component {
                         </Col>
                     </Row>
                             <Form.Group>
-                                   <Button variant="light"
+                                   <Button variant="primary"
                                            className= "btn-block"
                                            onClick={ () =>  this.doAdministratorRegistration() }>
                                     <FontAwesomeIcon icon={faUsers} /> Administrator Registration

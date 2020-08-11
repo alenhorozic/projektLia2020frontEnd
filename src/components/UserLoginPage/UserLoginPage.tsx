@@ -88,7 +88,7 @@ export default class UserLoginPage extends React.Component{
  render() {
         if (this.state.isLoggedIn === true) {
             return (
-                <Redirect to="/" />
+                <Redirect to="/user/userhomepage" />
             );
         }
         return (

@@ -114,7 +114,7 @@ export class UserRegistrationPage extends React.Component {
                                           onChange={ event => this.formInputChange( event as any ) } />
                             </Form.Group>
                             <Form.Group>
-                                   <Button variant="light"
+                                   <Button variant="primary"
                                            className= "btn-block"
                                            onClick={ () =>  this.doUserRegistration() }>
                                     <FontAwesomeIcon icon={faUserPlus} /> User Registration
