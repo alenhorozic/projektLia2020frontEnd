@@ -18,6 +18,7 @@ import { UserRegistrationPage } from './components/UserRegistrationPage/UserRegi
 import { AdministratorRegistrationPage } from './components/AdministratorRegistrationPage/AdministratorRegistrationPage';
 import AdministratorHomePage from './components/AdministratorHomePage/AdministratorHomePage';
 import UserHomePage from './components/UserHomePage/UserHomePage';
+import AccauntUserPage from './components/AccauntUserPage/AccauntUserPage';
 
 const menuItems = [
   new MainMenuItem("Home","/"),
@@ -43,6 +44,7 @@ ReactDOM.render(
         <Route path ="/administrator/registeradministrator" component={AdministratorRegistrationPage} />
         <Route path ="/administrator/administratorhomepage" component={AdministratorHomePage} />
         <Route path ="/user/userhomepage" component={UserHomePage} />
+        <Route path ="/accaunt/user" component={AccauntUserPage} />
       </Switch>
     </HashRouter>
   </React.StrictMode>,

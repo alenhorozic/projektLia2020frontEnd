@@ -1,70 +1,39 @@
 import React from 'react';
-import { Container, Card, Row, Col } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faUsers, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
-import { Redirect, Link } from 'react-router-dom';
-import UserType from '../../types/UserType';
+import AccauntType from '../../types/AccauntType';
 import api, { ApiResponse } from '../../api/api';
+import { Redirect, Link, } from 'react-router-dom';
+import { Col, Container, Card, Row } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faMoneyCheck, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
 
-interface UserHomePageState {
+interface AccauntUserPageState {
     isUserLoggedIn: boolean;
-    user:UserType[];
+    accaunt:AccauntType[];
 
 }
-
-interface ApiUserDto {
+interface ApiAccauntDto {
+    accauntId: number;
+    cratedAt: Date;
+    accauntNumber: number;
+    isActiv: number;
     userId: number;
-    email: string;
-    forname: string;
-    surname: string;
-    phoneNumber: string;
+    accauntName: string;
 }
+class AccauntUserPage extends React.Component {
+    state: AccauntUserPageState;
 
-class UserHomePage extends React.Component {
-    state: UserHomePageState;
-    
     constructor(props: Readonly<{}>) {
         super(props);
 
         this.state = {
             isUserLoggedIn: true,
-            user:[],
-            
+            accaunt:[],
         };
     }
-
     componentWillMount() {
-        this.getUser();
-    }
-    componentDidUpdate() {
-        this.getUser();
+        this.getAccaunt();
     }
 
-    private getUser() {
-        api('api/user/user','get',{})
-        .then((res: ApiResponse) =>{
-            if (res.status === 'error' || res.status === 'login') {
-                this.setLoginState(false);
-                return;
-            }
-            this.putUserInState(res.data);
-        });
-    }
-    private putUserInState(data: ApiUserDto[]) {
-        const user: UserType[] = data.map(user => {
-            return {
-                userId: user.userId,
-                email: user.email,
-                forname: user.forname,
-                surname: user.surname,
-                phoneNumber: user.phoneNumber,
-            };
-        });
-        const newState = Object.assign(this.state, {
-            user: user,
-        });
-        this.setState(newState);
-    }
 
     private setLoginState(isUserLoggedIn: boolean) {
         const newState = Object.assign(this.state, {
@@ -72,6 +41,34 @@ class UserHomePage extends React.Component {
         });
         this.setState(newState);
      }
+
+    private getAccaunt() {
+        api('api/accaunt/user','get',{})
+        .then((res: ApiResponse) =>{
+            if (res.status === 'error' || res.status === 'login') {
+                this.setLoginState(false);
+                return;
+            }
+            this.putAccauntInState(res.data);
+            console.log(res);
+        });
+    }
+    private putAccauntInState(data: ApiAccauntDto[]) {
+        const accaunt: AccauntType[] = data.map(accaunt => {
+            return {
+               accauntId: accaunt.accauntId,
+               cratedAt: accaunt.cratedAt,
+               accauntNumber: accaunt.accauntNumber,
+               isActiv: accaunt.isActiv,
+               userId: accaunt.userId,
+               accauntName: accaunt.accauntName,
+            };
+        });
+        const newState = Object.assign(this.state, {
+            accaunt: accaunt,
+        });
+        this.setState(newState);
+    }
 
     render () {
         if (this.state.isUserLoggedIn === false) {
@@ -84,10 +81,10 @@ class UserHomePage extends React.Component {
     <Card>
       <Card.Body>
           <Row>
-              {this.state.user.map(this.singelUser)}
+              {this.state.accaunt.map(this.singelAccaunt)}
           </Row>
           <Card.Title>
-              <FontAwesomeIcon icon={faHome} /> This is User Home Page 
+              <FontAwesomeIcon icon={faUser} /> This is Accaunt User Page 
           </Card.Title>
           <Card.Text>
                 <p>Welcome to the User Home Page ......</p>
@@ -110,10 +107,7 @@ class UserHomePage extends React.Component {
                 <Card.Title>
                  <FontAwesomeIcon icon={faMoneyBillAlt} /> Accaunt User Page
                 </Card.Title>
-                <Link to='/accaunt/user'
-                className="btn btn-primary btn-block">
-                  Go To Accaunt User Page
-                </Link>
+                
                 </Card.Body>
               </Card>
             </Col>
@@ -123,25 +117,32 @@ class UserHomePage extends React.Component {
     </Container>
         );
     }
-    private singelUser(user: UserType) {
+    private singelAccaunt(accaunt: AccauntType) {
         return (
             <Col>
             <Card className="mb-3">
                 <Card.Body>
                     <Card.Title>
-                    <FontAwesomeIcon icon={faUsers} /> User
+                        <FontAwesomeIcon icon={faMoneyCheck} /> Accaunt
                     </Card.Title>
                     <Card.Text>
-                <p>ID: { user.userId}</p>
-                <p>Forname: { user.forname} </p>
-                <p>Surname: { user.surname} </p>
-                <p>email: { user.email} </p>
-                <p>phoneNumber: { user.phoneNumber} </p>
-          </Card.Text>
+                     <p>ID: { accaunt.accauntId}</p>
+                     <p>name: { accaunt.accauntName} </p>
+                     <p>AccauntNumber: { accaunt.accauntNumber} </p>
+                     <p>Is Activ: { accaunt.isActiv} </p>
+                     <p>Created: { accaunt.cratedAt} </p>
+                    </Card.Text>
+                    <Link to={`/accaunt/${ accaunt.accauntId}`}
+                      className="btn btn-primary btn-block">
+                      Go To Accaunt Detals
+                    </Link>
                 </Card.Body>
             </Card>
             </Col>
         );
     }
+
 }
-export default UserHomePage;
+
+
+export default AccauntUserPage;
