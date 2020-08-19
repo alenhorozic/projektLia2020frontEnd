@@ -19,10 +19,18 @@ interface ApiAccauntDto {
     userId: number;
     accauntName: string;
 }
-class AccauntUserPage extends React.Component {
-    state: AccauntUserPageState;
 
-    constructor(props: Readonly<{}>) {
+interface AccauntUserPageProperties {
+    match:{
+        params:{
+            id:number;
+        }
+    }
+}
+
+export default class AccauntUserPage extends React.Component<AccauntUserPageProperties>{
+          state: AccauntUserPageState;
+    constructor(props: Readonly<AccauntUserPageProperties>) {
         super(props);
 
         this.state = {
@@ -31,10 +39,12 @@ class AccauntUserPage extends React.Component {
         };
     }
     componentWillMount() {
-        this.getAccaunt();
+        this.getAccaunt()
     }
-
-
+    UNSAFE_componentWillReceiveProps(newProperties: AccauntUserPageProperties) {
+        this.getAccaunt()
+    }
+    
     private setLoginState(isUserLoggedIn: boolean) {
         const newState = Object.assign(this.state, {
             isUserLoggedIn: isUserLoggedIn,
@@ -43,7 +53,7 @@ class AccauntUserPage extends React.Component {
      }
 
     private getAccaunt() {
-        api('api/accaunt/user','get',{})
+        api('api/accaunt','get',{})
         .then((res: ApiResponse) =>{
             if (res.status === 'error' || res.status === 'login') {
                 this.setLoginState(false);
@@ -54,6 +64,7 @@ class AccauntUserPage extends React.Component {
         });
     }
     private putAccauntInState(data: ApiAccauntDto[]) {
+        data = Array.from(data)
         const accaunt: AccauntType[] = data.map(accaunt => {
             return {
                accauntId: accaunt.accauntId,
@@ -80,14 +91,12 @@ class AccauntUserPage extends React.Component {
 <Container>
     <Card>
       <Card.Body>
-          <Row>
-              {this.state.accaunt.map(this.singelAccaunt)}
-          </Row>
+          
           <Card.Title>
               <FontAwesomeIcon icon={faUser} /> This is Accaunt User Page 
           </Card.Title>
           <Card.Text>
-                <p>Welcome to the User Home Page ......</p>
+                <p>Welcome to the Accaunt User Home Page ......</p>
                 <p>As an User, you get access to functions in this application that are intended for logged-in User, e.g. register a new Accaunt and much more ......................</p>
           </Card.Text>
           <Row>
@@ -112,6 +121,9 @@ class AccauntUserPage extends React.Component {
               </Card>
             </Col>
           </Row>
+          <Row>
+              {this.state.accaunt.map(this.singelAccaunt)}
+          </Row>
       </Card.Body>
     </Card>
     </Container>
@@ -119,7 +131,7 @@ class AccauntUserPage extends React.Component {
     }
     private singelAccaunt(accaunt: AccauntType) {
         return (
-            <Col>
+            <Col lg="6" md="6" sm="12" xs="12">
             <Card className="mb-3">
                 <Card.Body>
                     <Card.Title>
@@ -143,6 +155,3 @@ class AccauntUserPage extends React.Component {
     }
 
 }
-
-
-export default AccauntUserPage;

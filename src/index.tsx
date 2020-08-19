@@ -44,7 +44,8 @@ ReactDOM.render(
         <Route path ="/administrator/registeradministrator" component={AdministratorRegistrationPage} />
         <Route path ="/administrator/administratorhomepage" component={AdministratorHomePage} />
         <Route path ="/user/userhomepage" component={UserHomePage} />
-        <Route path ="/accaunt/user" component={AccauntUserPage} />
+        <Route path ="/accaunt" component={AccauntUserPage} />
+        
       </Switch>
     </HashRouter>
   </React.StrictMode>,

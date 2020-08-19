@@ -32,11 +32,8 @@ class UserHomePage extends React.Component {
             
         };
     }
-
+    
     componentWillMount() {
-        this.getUser();
-    }
-    componentDidUpdate() {
         this.getUser();
     }
 
@@ -51,6 +48,7 @@ class UserHomePage extends React.Component {
         });
     }
     private putUserInState(data: ApiUserDto[]) {
+        data = Array.from(data)
         const user: UserType[] = data.map(user => {
             return {
                 userId: user.userId,
@@ -83,9 +81,7 @@ class UserHomePage extends React.Component {
 <Container>
     <Card>
       <Card.Body>
-          <Row>
-              {this.state.user.map(this.singelUser)}
-          </Row>
+          
           <Card.Title>
               <FontAwesomeIcon icon={faHome} /> This is User Home Page 
           </Card.Title>
@@ -110,13 +106,16 @@ class UserHomePage extends React.Component {
                 <Card.Title>
                  <FontAwesomeIcon icon={faMoneyBillAlt} /> Accaunt User Page
                 </Card.Title>
-                <Link to='/accaunt/user'
+                <Link to='/accaunt'
                 className="btn btn-primary btn-block">
                   Go To Accaunt User Page
                 </Link>
                 </Card.Body>
               </Card>
             </Col>
+          </Row>
+          <Row>
+              {this.state.user.map(this.singelUser)}
           </Row>
       </Card.Body>
     </Card>

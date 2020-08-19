@@ -1,3 +1,5 @@
+import TransaktionType from "./TransaktionType";
+
 export default class AccauntType {
     accauntId?: number;
     cratedAt?: Date;
@@ -5,4 +7,5 @@ export default class AccauntType {
     isActiv?: number;
     userId?: number;
     accauntName?: string;
+    transaktion?:TransaktionType[];
 }
