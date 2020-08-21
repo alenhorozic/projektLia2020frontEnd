@@ -9,8 +9,8 @@ import { faUser, faMoneyCheck, faMoneyBillAlt } from '@fortawesome/free-solid-sv
 interface AccauntUserPageState {
     isUserLoggedIn: boolean;
     accaunt:AccauntType[];
-
 }
+
 interface ApiAccauntDto {
     accauntId: number;
     cratedAt: Date;
@@ -50,7 +50,7 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
             isUserLoggedIn: isUserLoggedIn,
         });
         this.setState(newState);
-     }
+    }
 
     private getAccaunt() {
         api('api/accaunt','get',{})
@@ -153,5 +153,4 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
             </Col>
         );
     }
-
 }
