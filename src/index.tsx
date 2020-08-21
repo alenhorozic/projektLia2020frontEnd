@@ -19,6 +19,7 @@ import { AdministratorRegistrationPage } from './components/AdministratorRegistr
 import AdministratorHomePage from './components/AdministratorHomePage/AdministratorHomePage';
 import UserHomePage from './components/UserHomePage/UserHomePage';
 import AccauntUserPage from './components/AccauntUserPage/AccauntUserPage';
+import TransaktionPage from './components/TransaktionPage/TransaktionPage';
 
 const menuItems = [
   new MainMenuItem("Home","/"),
@@ -45,6 +46,7 @@ ReactDOM.render(
         <Route path ="/administrator/administratorhomepage" component={AdministratorHomePage} />
         <Route path ="/user/userhomepage" component={UserHomePage} />
         <Route path ="/accaunt" component={AccauntUserPage} />
+        <Route path ="/transaktion" component={TransaktionPage} />
         
       </Switch>
     </HashRouter>

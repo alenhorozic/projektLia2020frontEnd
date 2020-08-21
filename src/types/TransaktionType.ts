@@ -1,6 +1,7 @@
+
 export default class TransaktionType {
     transaktionId?: number;
-    createdAt?: Date;
+    createdAt?: string;
     transaktionTypeId?: number;
     accauntId?: number;
     amount?: number;

@@ -1,26 +1,25 @@
 import React from 'react';
-import AccauntType from '../../types/AccauntType';
 import api, { ApiResponse } from '../../api/api';
-import { Redirect, Link, } from 'react-router-dom';
+import { Redirect, } from 'react-router-dom';
 import { Col, Container, Card, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faMoneyCheck, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
+import TransaktionType from '../../types/TransaktionType';
 
-interface AccauntUserPageState {
+interface TransaktionPageState {
     isUserLoggedIn: boolean;
-    accaunt:AccauntType[];
+    transaktion:TransaktionType[];
 }
 
-interface ApiAccauntDto {
+interface ApiTransaktionDto {
     accauntId: number;
-    cratedAt: Date;
-    accauntNumber: number;
-    isActiv: number;
+    createdAt: string;
+    amount: number;
     userId: number;
     accauntName: string;
 }
 
-interface AccauntUserPageProperties {
+interface TransaktionPageProperties {
     match:{
         params:{
             id:number;
@@ -28,21 +27,21 @@ interface AccauntUserPageProperties {
     }
 }
 
-export default class AccauntUserPage extends React.Component<AccauntUserPageProperties>{
-          state: AccauntUserPageState;
-    constructor(props: Readonly<AccauntUserPageProperties>) {
+export default class TransaktionPage extends React.Component<TransaktionPageProperties>{
+          state: TransaktionPageState;
+    constructor(props: Readonly<TransaktionPageProperties>) {
         super(props);
 
         this.state = {
             isUserLoggedIn: true,
-            accaunt:[],
+            transaktion:[],
         };
     }
     componentWillMount() {
-        this.getAccaunt()
+        this.getTransaktion()
     }
-    UNSAFE_componentWillReceiveProps(newProperties: AccauntUserPageProperties) {
-        this.getAccaunt()
+    UNSAFE_componentWillReceiveProps(newProperties: TransaktionPageProperties) {
+        this.getTransaktion()
     }
     
     private setLoginState(isUserLoggedIn: boolean) {
@@ -52,31 +51,31 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
         this.setState(newState);
     }
 
-    private getAccaunt() {
-        api('api/accaunt','get',{})
+    private getTransaktion() {
+        api('api/transaktion','get',{})
         .then((res: ApiResponse) =>{
             if (res.status === 'error' || res.status === 'login') {
                 this.setLoginState(false);
                 return;
             }
-            this.putAccauntInState(res.data);
+            this.putTransaktionInState(res.data);
             console.log(res);
         });
     }
-    private putAccauntInState(data: ApiAccauntDto[]) {
+    private putTransaktionInState(data: ApiTransaktionDto[]) {
         data = Array.from(data)
-        const accaunt: AccauntType[] = data.map(accaunt => {
+        const transaktion: TransaktionType[] = data.map(transaktion => {
             return {
-               accauntId: accaunt.accauntId,
-               cratedAt: accaunt.cratedAt,
-               accauntNumber: accaunt.accauntNumber,
-               isActiv: accaunt.isActiv,
-               userId: accaunt.userId,
-               accauntName: accaunt.accauntName,
+                createdAt: transaktion.createdAt,
+                amount: transaktion.amount,
+                transaktionId: transaktion.accauntId,
+                accauntId: transaktion.accauntId,
+                transaktionTypeId : transaktion.userId,
+               
             };
         });
         const newState = Object.assign(this.state, {
-            accaunt: accaunt,
+            transaktion: transaktion,
         });
         this.setState(newState);
     }
@@ -93,13 +92,13 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
       <Card.Body>
           
           <Card.Title>
-              <FontAwesomeIcon icon={faUser} /> This is Accaunt User Page 
+              <FontAwesomeIcon icon={faUser} /> This is Transaktion Accaunt Page 
           </Card.Title>
           <Card.Text>
-                <p>Welcome to the Accaunt User Home Page ......</p>
+                <p>Welcome to the Transaktion Accaunt Page ......</p>
           </Card.Text>
           <Row>
-              {this.state.accaunt.map(this.singelAccaunt)}
+              {this.state.transaktion.map(this.singelTransaktion)}
           </Row>
           <Row>
             <Col lg="6" md="6" sm="12" xs="12">
@@ -129,25 +128,17 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
     </Container>
         );
     }
-    private singelAccaunt(accaunt: AccauntType) {
+    private singelTransaktion(transaktion: TransaktionType) {
         return (
             <Col lg="12" md="12" sm="12" xs="12">
             <Card className="mb-3">
                 <Card.Body>
                     <Card.Title>
-                        <FontAwesomeIcon icon={faMoneyCheck} /> Accaunt
+                        <FontAwesomeIcon icon={faMoneyCheck} /> Transaktion
                     </Card.Title>
                     <Card.Text>
-                     <p>ID: { accaunt.accauntId}</p>
-                     <p>name: { accaunt.accauntName} </p>
-                     <p>AccauntNumber: { accaunt.accauntNumber} </p>
-                     <p>Is Activ: { accaunt.isActiv} </p>
-                     <p>Created: { accaunt.cratedAt} </p>
+                     <p>AccauntID: {  transaktion.accauntId } Created: { transaktion.createdAt} Amount: { transaktion.amount } </p>
                     </Card.Text>
-                    <Link to={`/transaktion`}
-                      className="btn btn-primary btn-block">
-                      Go To Accaunt Transaktion Detals
-                    </Link>
                 </Card.Body>
             </Card>
             </Col>
