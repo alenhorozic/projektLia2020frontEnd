@@ -18,6 +18,13 @@ interface ApiAccauntDto {
     isActiv: number;
     userId: number;
     accauntName: string;
+      user:{
+        userId?: number;
+        email?: string;
+        forname?: string;
+        surname?: string;
+        phoneNumber?: string;
+    }
 }
 
 interface AccauntUserPageProperties {
@@ -73,12 +80,20 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
                isActiv: accaunt.isActiv,
                userId: accaunt.userId,
                accauntName: accaunt.accauntName,
+                 user:{
+                     email: accaunt.user.email,
+                     phoneNumber: accaunt.user.phoneNumber,
+                     forname: accaunt.user.forname,
+                     surname: accaunt.user.surname,
+                 }
             };
         });
         const newState = Object.assign(this.state, {
             accaunt: accaunt,
+            
         });
         this.setState(newState);
+        console.log(accaunt);
     }
 
     render () {
@@ -135,11 +150,13 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
             <Card className="mb-3">
                 <Card.Body>
                     <Card.Title>
-                        <FontAwesomeIcon icon={faMoneyCheck} /> Accaunt
+                        <FontAwesomeIcon icon={faMoneyCheck} /> Accaunt ID: { accaunt.accauntId}
                     </Card.Title>
                     <Card.Text>
-                     <p>ID: { accaunt.accauntId}</p>
-                     <p>name: { accaunt.accauntName} </p>
+                     <p>Owner Email: {accaunt.user?.email}</p>
+                     <p>Owner ForName: {accaunt.user?.surname} Ovner SurName: {accaunt.user?.forname}</p>
+                     <p>Owner PhoneNumber: {accaunt.user?.phoneNumber}</p>
+                     <p>AccauntName: { accaunt.accauntName} </p>
                      <p>AccauntNumber: { accaunt.accauntNumber} </p>
                      <p>Is Activ: { accaunt.isActiv} </p>
                      <p>Created: { accaunt.cratedAt} </p>

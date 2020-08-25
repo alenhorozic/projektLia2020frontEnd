@@ -1,3 +1,4 @@
+import TransaktionTypeType from "./TransaktionTypeType";
 
 export default class TransaktionType {
     transaktionId?: number;
@@ -5,4 +6,6 @@ export default class TransaktionType {
     transaktionTypeId?: number;
     accauntId?: number;
     amount?: number;
+    userId?: number;
+    transaktionType?: TransaktionTypeType;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Card, Form, Button, Col, Alert } from 'react-bootstrap';
-import { faSignInAlt }  from '@fortawesome/free-solid-svg-icons';
+import { Container, Card, Form, Button, Col, Alert, InputGroup } from 'react-bootstrap';
+import { faSignInAlt, faPassport, faAt }  from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import api, { ApiResponse, saveToken, saveRefreshToken } from '../../api/api';
 import { Redirect } from 'react-router-dom';
@@ -102,15 +102,28 @@ export default class UserLoginPage extends React.Component{
                        <Form>
                             <Form.Group>
                             <Form.Label htmlFor="email">E-mail:</Form.Label>
-                            <Form.Control type="email" id="email"
+                            <InputGroup>
+                              <InputGroup.Prepend>
+                              <InputGroup.Text><FontAwesomeIcon icon={faAt} /></InputGroup.Text>
+                              </InputGroup.Prepend>
+                            <Form.Control placeholder="Your email Address"
+                                          type="email" id="email"
                                           value ={ this.state.email } 
                                           onChange={ event => this.formInputChange( event as any ) } />
-                            </Form.Group>
+                            </InputGroup>
+                            </Form.Group>                            
                             <Form.Group>
                             <Form.Label htmlFor="password">Password:</Form.Label>
-                            <Form.Control type="password" id="password" 
+                            <InputGroup>
+                              <InputGroup.Prepend>
+                              <InputGroup.Text><FontAwesomeIcon icon={faPassport} /></InputGroup.Text>
+                              </InputGroup.Prepend>
+                            <Form.Control
+                             placeholder="Your Password"
+                                          type="password" id="password" 
                                           value ={ this.state.password } 
                                           onChange={ event => this.formInputChange( event as any ) } />
+                            </InputGroup>            
                             </Form.Group>
                             <Form.Group>
                                    <Button variant="primary"

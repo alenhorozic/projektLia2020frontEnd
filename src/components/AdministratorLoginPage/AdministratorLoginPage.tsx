@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Card, Col, Form, Button, Alert } from 'react-bootstrap';
-import { faSignInAlt }  from '@fortawesome/free-solid-svg-icons';
+import { Container, Card, Col, Form, Button, Alert, InputGroup } from 'react-bootstrap';
+import { faSignInAlt, faUser, faPassport }  from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect } from 'react-router-dom';
 import apiAdministrator, { ApiResponse, saveToken, saveRefreshToken } from '../../api/apiAdministrator';
@@ -100,15 +100,27 @@ export default class AdministratorLoginPage extends React.Component{
                        <Form>
                             <Form.Group>
                             <Form.Label htmlFor="username">UserName:</Form.Label>
-                            <Form.Control type="username" id="username"
+                            <InputGroup>
+                              <InputGroup.Prepend>
+                              <InputGroup.Text><FontAwesomeIcon icon={faUser} /></InputGroup.Text>
+                              </InputGroup.Prepend>
+                            <Form.Control placeholder="Your UserName"
+                                          type="username" id="username"
                                           value ={ this.state.username } 
                                           onChange={ event => this.formInputChange( event as any ) } />
+                            </InputGroup>              
                             </Form.Group>
                             <Form.Group>
                             <Form.Label htmlFor="password">Password:</Form.Label>
-                            <Form.Control type="password" id="password" 
+                            <InputGroup>
+                              <InputGroup.Prepend>
+                              <InputGroup.Text><FontAwesomeIcon icon={faPassport} /></InputGroup.Text>
+                              </InputGroup.Prepend>
+                            <Form.Control placeholder="Your Password"
+                                          type="password" id="password" 
                                           value ={ this.state.password } 
                                           onChange={ event => this.formInputChange( event as any ) } />
+                            </InputGroup>              
                             </Form.Group>
                             <Form.Group>
                                    <Button variant="primary"

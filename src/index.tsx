@@ -27,8 +27,8 @@ const menuItems = [
   new MainMenuItem("About us","/about-us"),
   new MainMenuItem("Log in/user","/user/login"),
   new MainMenuItem("Log in/administrator","/administrator/login"),
-  //new MainMenuItem("User Registration","/administrator/registeruser"),
-  //new MainMenuItem("Administrator Registration","/administrator/registeradministrator")
+  new MainMenuItem("User Log Out","/user/logout"),
+  new MainMenuItem("Administrator Log Out","/administrator/logout"),
 ];
 
 ReactDOM.render(
