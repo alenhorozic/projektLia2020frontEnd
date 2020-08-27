@@ -5,6 +5,7 @@ import { faHome, faUser, faUsers, faMoneyBillAlt } from '@fortawesome/free-solid
 import { Redirect, Link } from 'react-router-dom';
 import UserType from '../../types/UserType';
 import api, { ApiResponse } from '../../api/api';
+import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
 
 interface UserHomePageState {
     isUserLoggedIn: boolean;
@@ -79,7 +80,8 @@ class UserHomePage extends React.Component {
         }
         return (
 <Container>
-    <Card>
+<RoleMainMenu role='user'/>
+    <Card className="mt-3">
       <Card.Body>
           
           <Card.Title>

@@ -8,7 +8,6 @@ import 'jquery/dist/jquery.js';
 import 'popper.js/dist/popper.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import '@fortawesome/fontawesome-free/css/fontawesome.css';
-import { MainMenu, MainMenuItem } from './components/MainMenu/MainMenu';
 import ContactPage from './components/ContactPage/ContactPage';
 import AboutUsPage from './components/AboutUsPage/AboutUsPage';
 import UserLoginPage from './components/UserLoginPage/UserLoginPage';
@@ -20,27 +19,20 @@ import AdministratorHomePage from './components/AdministratorHomePage/Administra
 import UserHomePage from './components/UserHomePage/UserHomePage';
 import AccauntUserPage from './components/AccauntUserPage/AccauntUserPage';
 import TransaktionPage from './components/TransaktionPage/TransaktionPage';
-
-const menuItems = [
-  new MainMenuItem("Home","/"),
-  new MainMenuItem("Contact","/contact"),
-  new MainMenuItem("About us","/about-us"),
-  new MainMenuItem("Log in/user","/user/login"),
-  new MainMenuItem("Log in/administrator","/administrator/login"),
-  new MainMenuItem("User Log Out","/user/logout"),
-  new MainMenuItem("Administrator Log Out","/administrator/logout"),
-];
+import { UserLogoutPage } from './components/UserLogoutPage/UserLogoutPage';
+import { AdministratorLogoutPage } from './components/AdministratorLogoutPage/AdministratorLogoutPage';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MainMenu items={menuItems}></MainMenu>
     <HashRouter>
       <Switch>
         <Route exact path ="/" component={ HomePage } />
         <Route path ="/contact" component={ ContactPage } />
         <Route path ="/about-us" component={ AboutUsPage } />
         <Route path ="/user/login" component={ UserLoginPage } />
+        <Route path ="/user/logout" component={ UserLogoutPage } />
         <Route path ="/administrator/login" component={ AdministratorLoginPage } />
+        <Route path ="/administrator/logout" component={ AdministratorLogoutPage } />
         <Route path ="/administrator/registeruser" component={UserRegistrationPage} />
         <Route path ="/administrator/registeradministrator" component={AdministratorRegistrationPage} />
         <Route path ="/administrator/administratorhomepage" component={AdministratorHomePage} />

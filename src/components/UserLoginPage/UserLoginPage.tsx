@@ -4,6 +4,7 @@ import { faSignInAlt, faPassport, faAt }  from '@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import api, { ApiResponse, saveToken, saveRefreshToken } from '../../api/api';
 import { Redirect } from 'react-router-dom';
+import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
 
 interface UserLoginPageState {
     email: string;
@@ -93,8 +94,9 @@ export default class UserLoginPage extends React.Component{
         }
         return (
             <Container>
+                <RoleMainMenu role='visitor'/>
              <Col md={{span:6,offset:3}}>
-               <Card>
+               <Card className="mt-3">
                   <Card.Body>
                      <Card.Title>
                              <FontAwesomeIcon icon={faSignInAlt} /> This is User login  Page

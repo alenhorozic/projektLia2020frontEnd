@@ -76,20 +76,25 @@ export default function apiAdministrator(
         
      }
 
-     function getToken(): string {
+    export function getToken(): string {
          const token = localStorage.getItem('api_token');
          return 'Berer '+ token;
      }
      export function saveToken(token: string) {
          localStorage.setItem('api_token', token);
      }
-     function getRefreshToken(): string {
+    export function getRefreshToken(): string {
         const token = localStorage.getItem('api_refresh_token');
         return  token + '';
      }
     export function saveRefreshToken(token: string ){
         localStorage.setItem('api_refresh_token', token);
      }
+
+     export function removeAdministratorToken(){
+        localStorage.removeItem('api_token');
+        localStorage.removeItem('api_refresh_token')
+    } 
 
     async function refreshToken(
          ): Promise<string | null> {

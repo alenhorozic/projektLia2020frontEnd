@@ -4,6 +4,7 @@ import { faSignInAlt, faUser, faPassport }  from '@fortawesome/free-solid-svg-ic
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect } from 'react-router-dom';
 import apiAdministrator, { ApiResponse, saveToken, saveRefreshToken } from '../../api/apiAdministrator';
+import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
 
 interface AdministratorLoginPageState {
     username: string;
@@ -91,8 +92,9 @@ export default class AdministratorLoginPage extends React.Component{
         }
         return (
             <Container>
+                <RoleMainMenu role='visitor'/>
              <Col md={{span:6,offset:3}}>
-               <Card>
+               <Card className="mt-3">
                   <Card.Body>
                      <Card.Title>
                              <FontAwesomeIcon icon={faSignInAlt} /> This is Administrator login  Page

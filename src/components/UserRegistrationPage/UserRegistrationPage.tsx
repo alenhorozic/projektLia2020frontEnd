@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import api, { ApiResponse } from '../../api/apiAdministrator';
+import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
 
 interface UserRegistrationPageState {
     formData:{
@@ -50,8 +51,9 @@ export class UserRegistrationPage extends React.Component {
     render() {
         return (
         <Container>
+            <RoleMainMenu role='administrator'/>
              <Col md={{span:8,offset:2}}>
-               <Card>
+               <Card className="mt-3">
                   <Card.Body>
                      <Card.Title>
                             <FontAwesomeIcon icon={faUserPlus} /> User Registration
@@ -75,7 +77,8 @@ export class UserRegistrationPage extends React.Component {
                         <Col md="6">
                             <Form.Group>
                             <Form.Label htmlFor="email">E-mail:</Form.Label>
-                            <Form.Control type="email" id="email"
+                            <Form.Control placeholder="E-mail Address"
+                                          type="email" id="email"
                                           value ={ this.state.formData.email } 
                                           onChange={ event => this.formInputChange( event as any ) } />
                             </Form.Group>
@@ -83,7 +86,8 @@ export class UserRegistrationPage extends React.Component {
                         <Col md="6">
                             <Form.Group>
                             <Form.Label htmlFor="password">Password:</Form.Label>
-                            <Form.Control type="password" id="password" 
+                            <Form.Control placeholder="Password"
+                                          type="password" id="password" 
                                           value ={ this.state.formData.password } 
                                           onChange={ event => this.formInputChange( event as any ) } />
                             </Form.Group>
@@ -93,7 +97,8 @@ export class UserRegistrationPage extends React.Component {
                         <Col md="6">
                             <Form.Group>
                             <Form.Label htmlFor="forname">Forname:</Form.Label>
-                            <Form.Control type="text" id="forname"
+                            <Form.Control placeholder="Forname"
+                                          type="text" id="forname"
                                           value ={ this.state.formData.forname } 
                                           onChange={ event => this.formInputChange( event as any ) } />
                             </Form.Group>
@@ -101,7 +106,8 @@ export class UserRegistrationPage extends React.Component {
                         <Col md="6">
                             <Form.Group>
                             <Form.Label htmlFor="surname">Surname:</Form.Label>
-                            <Form.Control type="text" id="surname" 
+                            <Form.Control placeholder="Surname"
+                                          type="text" id="surname" 
                                           value ={ this.state.formData.surname } 
                                           onChange={ event => this.formInputChange( event as any ) } />
                             </Form.Group>
@@ -109,7 +115,8 @@ export class UserRegistrationPage extends React.Component {
                     </Row>
                             <Form.Group>
                             <Form.Label htmlFor="phoneNumber">Phone Number:</Form.Label>
-                            <Form.Control type="phone" id="phoneNumber" 
+                            <Form.Control placeholder="PhoneNumber"
+                                          type="phone" id="phoneNumber" 
                                           value ={ this.state.formData.phoneNumber } 
                                           onChange={ event => this.formInputChange( event as any ) } />
                             </Form.Group>
@@ -138,6 +145,7 @@ export class UserRegistrationPage extends React.Component {
             </p>
         );
     }
+
 
     private doUserRegistration() {
         const data = {

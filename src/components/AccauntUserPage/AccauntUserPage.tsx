@@ -5,6 +5,7 @@ import { Redirect, Link, } from 'react-router-dom';
 import { Col, Container, Card, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faMoneyCheck, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
+import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
 
 interface AccauntUserPageState {
     isUserLoggedIn: boolean;
@@ -13,7 +14,7 @@ interface AccauntUserPageState {
 
 interface ApiAccauntDto {
     accauntId: number;
-    cratedAt: Date;
+    cratedAt: string;
     accauntNumber: number;
     isActiv: number;
     userId: number;
@@ -104,7 +105,8 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
         }
         return (
 <Container>
-    <Card>
+<RoleMainMenu role='user'/>
+    <Card className="mt-3">
       <Card.Body>
           
           <Card.Title>
@@ -159,7 +161,7 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
                      <p>AccauntName: { accaunt.accauntName} </p>
                      <p>AccauntNumber: { accaunt.accauntNumber} </p>
                      <p>Is Activ: { accaunt.isActiv} </p>
-                     <p>Created: { accaunt.cratedAt} </p>
+                     <p>Created: { accaunt.cratedAt?.substring(0,19)} </p>
                     </Card.Text>
                     <Link to={`/transaktion`}
                       className="btn btn-primary btn-block">

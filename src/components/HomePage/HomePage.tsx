@@ -3,11 +3,13 @@ import {Container, Card, Row, Col} from 'react-bootstrap';
 import { faHome, faUser, faUsers}  from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
 
 function HomePage() {
   return (
     <Container>
-    <Card>
+      <RoleMainMenu role='visitor'/>
+    <Card className="mt-3">
       <Card.Body>
           <Card.Title>
               <FontAwesomeIcon icon={faHome} /> This is Home Page

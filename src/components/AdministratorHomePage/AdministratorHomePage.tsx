@@ -5,6 +5,7 @@ import { faHome, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Link, Redirect } from 'react-router-dom';
 import AdministratorType from '../../types/AdministratorType';
 import api, { ApiResponse } from '../../api/apiAdministrator';
+import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
 
 interface AdministratorHomePageState {
     isAdministratorLoggedIn: boolean;
@@ -79,7 +80,8 @@ class AdministratorHomePage extends React.Component {
         }
         return (
 <Container>
-    <Card>
+<RoleMainMenu role='administrator'/>
+    <Card >
       <Card.Body>
           <Row>
               {this.state.administrator.map(this.singelAdministrator)}

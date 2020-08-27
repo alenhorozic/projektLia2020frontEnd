@@ -5,6 +5,7 @@ import { Col, Container, Card, Row, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faMoneyCheck, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
 import TransaktionType from '../../types/TransaktionType';
+import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
 
 interface TransaktionPageState {
     isUserLoggedIn: boolean;
@@ -98,7 +99,8 @@ export default class TransaktionPage extends React.Component<TransaktionPageProp
         }
         return (
 <Container>
-    <Card>
+<RoleMainMenu role='user'/>
+    <Card className="mt-3">
       <Card.Body>
           
           <Card.Title>
@@ -120,7 +122,7 @@ export default class TransaktionPage extends React.Component<TransaktionPageProp
                                 <th>Transaktion ID</th>
                                 <th>CreatedAt</th>
                                 <th>Amount: kr</th>
-                                <th>Deposit/Whitdraw</th>
+                                <th>Deposit Whitdraw</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -128,7 +130,7 @@ export default class TransaktionPage extends React.Component<TransaktionPageProp
                                  return(
                                     <tr>
                                     <td>{tr.transaktionId}</td>
-                                    <td>{tr.createdAt}</td>
+                                    <td>{tr.createdAt?.substring(0,19)}</td>
                                     <td>{tr.amount} kr</td>
                                     <td>{tr.transaktionType?.name}</td>
                                         </tr>
