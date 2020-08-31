@@ -61,7 +61,7 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
     }
 
     private getAccaunt() {
-        api('api/accaunt','get',{})
+        api('api/accaunt','get',{},'user')
         .then((res: ApiResponse) =>{
             if (res.status === 'error' || res.status === 'login') {
                 this.setLoginState(false);

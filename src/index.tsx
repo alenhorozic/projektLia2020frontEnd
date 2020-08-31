@@ -39,7 +39,6 @@ ReactDOM.render(
         <Route path ="/user/userhomepage" component={UserHomePage} />
         <Route path ="/accaunt" component={AccauntUserPage} />
         <Route path ="/transaktion" component={TransaktionPage} />
-        
       </Switch>
     </HashRouter>
   </React.StrictMode>,

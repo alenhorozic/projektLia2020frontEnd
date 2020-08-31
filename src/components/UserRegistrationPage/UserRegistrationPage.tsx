@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Col, Card, Form, Button, Alert, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import api, { ApiResponse } from '../../api/apiAdministrator';
 import RoleMainMenu from '../RoleMainMenu/RoleMainMenu';
 
@@ -15,8 +15,8 @@ interface UserRegistrationPageState {
         phoneNumber: string;
     };
     errorMessage?: string;
-
     isRegistrationComplete?: boolean;
+    isAdministratorLoggedIn: boolean;
 }
 export class UserRegistrationPage extends React.Component {
     state: UserRegistrationPageState;
@@ -26,6 +26,7 @@ export class UserRegistrationPage extends React.Component {
 
         this.state = {
             isRegistrationComplete: false,
+            isAdministratorLoggedIn: true,
             formData:{
                 email: '',
                 password: '',
@@ -47,8 +48,19 @@ export class UserRegistrationPage extends React.Component {
     
         this.setState(newState);
     }
+    private setLoginState(isAdministratorLoggedIn: boolean) {
+        const newState = Object.assign(this.state, {
+            isAdministratorLoggedIn: isAdministratorLoggedIn,
+        });
+        this.setState(newState);
+     }
 
     render() {
+        if (this.state.isAdministratorLoggedIn === false) {
+            return (
+                <Redirect to="/administrator/login" />
+            );
+        }
         return (
         <Container>
             <RoleMainMenu role='administrator'/>
@@ -68,8 +80,12 @@ export class UserRegistrationPage extends React.Component {
         </Container>
         );
     }
-
     private renderForm() {
+        if (this.state.isAdministratorLoggedIn === false) {
+            return (
+                <Redirect to="/administrator/login" />
+            );
+        }
         return (
             <>
                 <Form>
@@ -155,25 +171,26 @@ export class UserRegistrationPage extends React.Component {
             surname: this.state.formData?.surname,
             phoneNumber: this.state.formData?.phoneNumber,
         };
-        api('api/administrator/registeruser/','put',data)
+        api('api/administrator/registeruser/','put',data,'administrator')
         .then((res: ApiResponse) => {
             console.log(res);
-            if(res.status === 'login') {
-                this.setErrorMessage('Admidinsrator must login to use this funktion!?');
+            if(res.status === 'error' && res.data.response.data.statusCode === 500 ) {
+                this.setLoginState(false);
                 return;
             }
             if(res.status === 'error' && res.data.response.status === 403 ) {
                 this.setErrorMessage('Admidinsrator must login to use this funktion!?');
+                this.setLoginState(false);
                 return;
             }
             if(res.status === 'error') {
-                this.setErrorMessage('System error...Wrong Input Feld....Try Again!?');
+                this.setErrorMessage('Wrong Input In E-mail Or Username Fild??..Try Again!?');
                 return;
             }
             if(res.status === 'ok' && res.data.statusCode !== undefined) {
                 let message = '';
                 switch (res.data.statusCode) {
-                    case -1001: message = 'Not Is Wrong user Whit Same email Or phoneNumber All Redy Exist'; break;
+                    case -1001: message = 'Not Is Wrong Administrator Whit Same Username Or Email All Redy Exist'; break;
                    
                 }
                 this.setErrorMessage(message);
@@ -203,4 +220,20 @@ export class UserRegistrationPage extends React.Component {
          });
          this.setState(newState);
      }
+     componentWillMount(){
+        this.getMyData();
+    }
+    componentWillUpdate(){
+        this.getMyData();
+    }
+    private getMyData(){
+    api('api/administrator/id','get',{},'administrator')
+    .then((res: ApiResponse) => {
+       console.log(res);
+       if (res.status === 'error' || res.status === 'login') {
+           this.setLoginState(false);
+           return;
+       }
+    });
+    }
 }

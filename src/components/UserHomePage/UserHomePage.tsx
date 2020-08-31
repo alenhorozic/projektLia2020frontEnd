@@ -39,7 +39,7 @@ class UserHomePage extends React.Component {
     }
 
     private getUser() {
-        api('api/user/user','get',{})
+        api('api/user/user','get',{},'user')
         .then((res: ApiResponse) =>{
             if (res.status === 'error' || res.status === 'login') {
                 this.setLoginState(false);

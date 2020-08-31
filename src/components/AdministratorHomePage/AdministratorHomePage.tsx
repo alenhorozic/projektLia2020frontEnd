@@ -32,7 +32,7 @@ class AdministratorHomePage extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getAdministrator();
     }
 
@@ -41,7 +41,7 @@ class AdministratorHomePage extends React.Component {
     }
 
     private getAdministrator() {
-        api('api/administrator/administrator','get',{})
+        api('api/administrator/administrator','get',{},'administrator')
         .then((res: ApiResponse) =>{
             if (res.status === 'error' || res.status === 'login') {
                 this.setLoginState(false);
@@ -52,6 +52,7 @@ class AdministratorHomePage extends React.Component {
     }
 
     private putAdministratorInState(data: ApiAdministratorDto[]) {
+        data = Array.from(data)
         const administrators: AdministratorType[] | undefined = data?.map(administrator => {
             return {
                 administratorId: administrator.administratorId,

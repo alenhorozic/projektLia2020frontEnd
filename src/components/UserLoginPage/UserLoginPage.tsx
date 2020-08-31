@@ -56,7 +56,8 @@ export default class UserLoginPage extends React.Component{
         {
         email: this.state.email,
         password: this.state.password,
-    }
+    },
+    'user'
     )
     .then((res: ApiResponse) => {
         
@@ -76,8 +77,8 @@ export default class UserLoginPage extends React.Component{
                 
                 return;
             }
-            saveToken(res.data.token);
-            saveRefreshToken(res.data.refreshToken);
+            saveToken('user',res.data.token);
+            saveRefreshToken('user',res.data.refreshToken);
 
             this.setLoginState(true);
         }

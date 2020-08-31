@@ -13,7 +13,6 @@ interface AdministratorRegistrationPageState {
         password: string;
     };
     errorMessage?: string;
-
     isRegistrationComplete?: boolean;
     isAdministratorLoggedIn: boolean;
 }
@@ -79,8 +78,12 @@ export class AdministratorRegistrationPage extends React.Component {
         </Container>
         );
     }
-
     private renderForm() {
+        if (this.state.isAdministratorLoggedIn === false) {
+            return (
+                <Redirect to="/administrator/login" />
+            );
+        }
         return (
             <>
                 <Form>
@@ -147,7 +150,7 @@ export class AdministratorRegistrationPage extends React.Component {
             password: this.state.formData?.password,
             username: this.state.formData?.username,
         };
-        api('api/administrator/registeradministrator/','put',data)
+        api('api/administrator/registeradministrator/','put',data,'administrator')
         .then((res: ApiResponse) => {
             console.log(res);
             if(res.status === 'error' && res.data.response.data.statusCode === 500 ) {
@@ -195,5 +198,21 @@ export class AdministratorRegistrationPage extends React.Component {
              isRegistrationComplete: true,
          });
          this.setState(newState);
+     }
+     componentWillMount(){
+         this.getMyData();
+     }
+     componentWillUpdate(){
+         this.getMyData();
+     }
+     private getMyData(){
+     api('api/administrator/id','get',{},'administrator')
+     .then((res: ApiResponse) => {
+        console.log(res);
+        if (res.status === 'error' || res.status === 'login') {
+            this.setLoginState(false);
+            return;
+        }
+     });
      }
 }

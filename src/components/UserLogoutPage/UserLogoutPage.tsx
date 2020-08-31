@@ -37,7 +37,7 @@ export class UserLogoutPage extends React.Component {
    }
 
    doLogout() {
-    removeUserToken();
+    removeUserToken('user');
     this.finished();
    }
 }

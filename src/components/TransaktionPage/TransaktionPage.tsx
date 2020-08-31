@@ -58,7 +58,7 @@ export default class TransaktionPage extends React.Component<TransaktionPageProp
     }
 
     private getTransaktion() {
-        api('api/transaktion','get',{})
+        api('api/transaktion','get',{},'user')
         .then((res: ApiResponse) =>{
             if (res.status === 'error' || res.status === 'login') {
                 this.setLoginState(false);
@@ -91,7 +91,30 @@ export default class TransaktionPage extends React.Component<TransaktionPageProp
         console.log(transaktion);
     }
 
+    private calculateSum(): number {
+        let sum: number = 0;
+        if( this.state.transaktion === undefined){
+            return sum;
+        }
+        else {
+        for(const item of this.state.transaktion) {
+            const typTransaktion:number = Number( item.transaktionType?.transaktionTypeId)
+            const amountTransaktion:number = Number( item.amount );
+            if(typTransaktion === 1){
+                sum=sum+amountTransaktion;
+            }
+            if(typTransaktion === 2){
+                sum=sum-amountTransaktion;
+            }
+            console.log(item.amount)
+        }
+        }  
+        return sum;
+    }
+
     render () {
+        const sum = this.calculateSum();
+
         if (this.state.isUserLoggedIn === false) {
             return (
                 <Redirect to="/user/login" />
@@ -101,8 +124,7 @@ export default class TransaktionPage extends React.Component<TransaktionPageProp
 <Container>
 <RoleMainMenu role='user'/>
     <Card className="mt-3">
-      <Card.Body>
-          
+      <Card.Body> 
           <Card.Title>
               <FontAwesomeIcon icon={faUser} /> This is Transaktion Accaunt Page 
           </Card.Title>
@@ -115,6 +137,9 @@ export default class TransaktionPage extends React.Component<TransaktionPageProp
                 <Card.Body>
                     <Card.Title>
                         <FontAwesomeIcon icon={faMoneyCheck} /> Transaktions For Your Accaunt
+                    </Card.Title>
+                    <Card.Title>
+                      Accaunt Saldo: {sum}kr
                     </Card.Title>
                     <Table hover size ="sm">
                         <thead>
@@ -133,7 +158,7 @@ export default class TransaktionPage extends React.Component<TransaktionPageProp
                                     <td>{tr.createdAt?.substring(0,19)}</td>
                                     <td>{tr.amount} kr</td>
                                     <td>{tr.transaktionType?.name}</td>
-                                        </tr>
+                                    </tr>
                                  )
                             },this)}
                         </tbody>
@@ -158,13 +183,11 @@ export default class TransaktionPage extends React.Component<TransaktionPageProp
               <Card.Body>
                 <Card.Title>
                  <FontAwesomeIcon icon={faMoneyBillAlt} /> Accaunt User Page
-                </Card.Title>
-                
+                </Card.Title>  
                 </Card.Body>
               </Card>
             </Col>
-          </Row>
-          
+          </Row>     
       </Card.Body>
     </Card>
     </Container>

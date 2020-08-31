@@ -56,7 +56,8 @@ export default class AdministratorLoginPage extends React.Component{
         {
         username: this.state.username,
         password: this.state.password,
-    }
+    },
+    'administrator'
     )
     .then((res: ApiResponse) => {
         
@@ -76,8 +77,8 @@ export default class AdministratorLoginPage extends React.Component{
                 
                 return;
             }
-            saveToken(res.data.token);
-            saveRefreshToken(res.data.refreshToken);
+            saveToken('administrator',res.data.token);
+            saveRefreshToken('administrator',res.data.refreshToken);
 
             this.setLoginState(true);
         }

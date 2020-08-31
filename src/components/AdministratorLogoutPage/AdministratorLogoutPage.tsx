@@ -37,7 +37,7 @@ export class AdministratorLogoutPage extends React.Component {
    }
 
    doLogout() {
-    removeAdministratorToken();
+    removeAdministratorToken('administrator');
     this.finished();
    }
 }
