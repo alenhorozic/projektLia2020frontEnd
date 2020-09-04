@@ -106,7 +106,7 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
         return (
 <Container>
 <RoleMainMenu role='user'/>
-    <Card className="mt-3">
+    <Card className="mt-3 mb-3 text-center">
       <Card.Body>
           
           <Card.Title>

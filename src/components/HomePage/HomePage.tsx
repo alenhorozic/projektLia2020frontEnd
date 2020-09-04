@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Card, Row, Col} from 'react-bootstrap';
+import {Container, Card, Row, Col, Image,} from 'react-bootstrap';
 import { faHome, faUser, faUsers}  from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,10 @@ function HomePage() {
   return (
     <Container>
       <RoleMainMenu role='visitor'/>
-    <Card className="mt-3">
+    <Card className="mt-3 mb-3 text-center">
+       <Card className="mt-3 mb-3 ml-3 mr-3" >
+           <Image style={{width: 'auto', height: '18rem'}} src="https://images.pexels.com/photos/9660/business-money-pink-coins.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" fluid />
+       </Card>
       <Card.Body>
           <Card.Title>
               <FontAwesomeIcon icon={faHome} /> This is Home Page

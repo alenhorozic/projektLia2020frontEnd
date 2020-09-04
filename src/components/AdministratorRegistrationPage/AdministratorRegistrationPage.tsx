@@ -184,7 +184,8 @@ export class AdministratorRegistrationPage extends React.Component {
             errorMessage: message,
         });
         this.setState(newState);
-     }
+    }
+    
      private handleErrorMessage(data: any) {
          let message = '';
 

@@ -82,7 +82,7 @@ class AdministratorHomePage extends React.Component {
         return (
 <Container>
 <RoleMainMenu role='administrator'/>
-    <Card >
+    <Card className="mt-3 mb-3 text-center">
       <Card.Body>
           <Row>
               {this.state.administrator.map(this.singelAdministrator)}
