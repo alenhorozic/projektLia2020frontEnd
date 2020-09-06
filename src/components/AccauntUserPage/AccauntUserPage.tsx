@@ -123,7 +123,11 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
               <Card className="mb-3">
                 <Card.Body>
                 <Card.Title>
-                 <FontAwesomeIcon icon={faUser} /> User Registration Page
+                 <FontAwesomeIcon icon={faMoneyCheck} /> CommingTransaktion Page
+                 <Link to={`/commingTransaktion`}
+                      className="btn btn-primary btn-block">
+                      CommingTransaktion Detals
+                    </Link>
                 </Card.Title>
                 
                 </Card.Body>
@@ -133,7 +137,11 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
               <Card className="mb-3">
               <Card.Body>
                 <Card.Title>
-                 <FontAwesomeIcon icon={faMoneyBillAlt} /> Accaunt User Page
+                 <FontAwesomeIcon icon={faMoneyBillAlt} /> Accaunt Transaktion Page
+                 <Link to={`/transaktion`}
+                      className="btn btn-primary btn-block">
+                      Go To Transaktion Detals
+                    </Link>
                 </Card.Title>
                 
                 </Card.Body>
@@ -163,10 +171,7 @@ export default class AccauntUserPage extends React.Component<AccauntUserPageProp
                      <p>Is Activ: { accaunt.isActiv} </p>
                      <p>Created: { accaunt.cratedAt?.substring(0,19)} </p>
                     </Card.Text>
-                    <Link to={`/transaktion`}
-                      className="btn btn-primary btn-block">
-                      Go To Accaunt Transaktion Detals
-                    </Link>
+                    
                 </Card.Body>
             </Card>
             </Col>

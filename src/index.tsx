@@ -21,6 +21,7 @@ import AccauntUserPage from './components/AccauntUserPage/AccauntUserPage';
 import TransaktionPage from './components/TransaktionPage/TransaktionPage';
 import { UserLogoutPage } from './components/UserLogoutPage/UserLogoutPage';
 import { AdministratorLogoutPage } from './components/AdministratorLogoutPage/AdministratorLogoutPage';
+import CommingTransaktionPage from './components/CommingTransaktionPage/CommingTransaktionPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -39,6 +40,7 @@ ReactDOM.render(
         <Route path ="/user/userhomepage" component={UserHomePage} />
         <Route path ="/accaunt" component={AccauntUserPage} />
         <Route path ="/transaktion" component={TransaktionPage} />
+        <Route path ="/commingtransaktion" component={CommingTransaktionPage} />
       </Switch>
     </HashRouter>
   </React.StrictMode>,
