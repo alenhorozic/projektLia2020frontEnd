@@ -3,7 +3,7 @@ import { ApiConfig } from '../config/api.config';
 
 export default function api(
     path: string,
-    method: 'get' | 'post' | 'put',
+    method: 'get' | 'post' | 'put' | 'delete',
     boby: any | undefined,
     role: 'user',
  ) {

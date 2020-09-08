@@ -4,7 +4,7 @@ import api, { ApiResponse } from '../../api/api';
 import { Redirect } from "react-router-dom";
 import { Container, Card, Row, Col, Table, Button, Modal, Form, Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faMoneyCheck, faPlus, faMoneyBillAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faMoneyCheck, faPlus, faMoneyBillAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import RoleMainMenu from "../RoleMainMenu/RoleMainMenu";
 
 interface CommingTransaktionPageState {
@@ -210,22 +210,23 @@ export default class CommingTransaktionPage extends React.Component<CommingTrans
                     <Table hover size ="sm" bordered>
                         <thead>
                             <tr>
-                                <th colSpan={5}>
+                                <th colSpan={6}>
                                 </th>
                                 <th>
                                     <Button variant="primary" size="sm"
                                         onClick={()=>this.showAddModal()}>
-                                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon> ADD Transaktion
+                                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon> ADD 
                                     </Button>
                                 </th>
                             </tr>
                             <tr>
-                                <th>CommingTransaktion ID</th>
+                                <th>ID</th>
                                 <th>CreatedAt</th>
                                 <th>Amount: kr</th>
                                 <th>TransaktionAt</th>
-                                <th>TransaktionToAccauntNumber</th>
+                                <th>ToAccaunt</th>
                                 <th>Status</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -233,11 +234,17 @@ export default class CommingTransaktionPage extends React.Component<CommingTrans
                                  return(
                                     <tr>
                                     <td>{tr.commingTransaktionId}</td>
-                                    <td>{tr.createdAt?.substring(0,19)}</td>
+                                    <td>{tr.createdAt?.substring(0,10)}</td>
                                     <td>{tr.amount} kr</td>
-                                    <td>{tr.transaktionAt?.substring(0,19)}</td>
+                                    <td>{tr.transaktionAt?.substring(0,10)}</td>
                                     <td>{tr.transaktionToAccauntNumber}</td>
                                     <td>{tr.status}</td>
+                                    <td>
+                                        <Button size="sm" variant="danger"
+                                        onClick={() => this.deliteCommingTransaktion(tr.commingTransaktionId)}>
+                                        <FontAwesomeIcon icon={faTrash}/>
+                                        </Button>
+                                    </td>
                                     </tr>
                                  )
                             },this)}
@@ -380,4 +387,17 @@ export default class CommingTransaktionPage extends React.Component<CommingTrans
         });
     }
 
+    private deliteCommingTransaktion(commingTransaktionId?:number){
+        if(!window.confirm('Are You Sure?????')){
+            return;
+        }
+        api('api/commingTransaktion/'+commingTransaktionId,'delete',{},'user')
+        .then((res:ApiResponse)=>{
+            if (res.status === 'error' || res.status === 'login') {
+                this.setLoginState(false);
+                return;
+            }
+            this.getCommingTransaktion();
+        });
+    }
 }
