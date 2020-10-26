@@ -207,7 +207,7 @@ export default class CommingTransaktionPage extends React.Component<CommingTrans
                     <Card.Title>
                       CommingTransaktion Total: {sum}kr
                     </Card.Title>
-                    <Table hover size ="sm" bordered>
+                    <Table responsive hover size ="sm" bordered>
                         <thead>
                             <tr>
                                 <th colSpan={6}>
@@ -364,6 +364,9 @@ export default class CommingTransaktionPage extends React.Component<CommingTrans
         this.getCommingTransaktion()
     }
     private doAddTransaktion(){
+        if(!window.confirm('Are You Sure?????')){
+            return;
+        }
         api('api/commingTransaktion','post',{
             accauntId: this.state.addModal.accauntId,
             amount: this.state.addModal.amount,

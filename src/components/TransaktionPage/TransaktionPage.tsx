@@ -182,7 +182,7 @@ export default class TransaktionPage extends React.Component<TransaktionPageProp
                     <Card.Title>
                       Accaunt Saldo: {sum}kr
                     </Card.Title>
-                    <Table hover size ="sm" bordered>
+                    <Table responsive hover size ="sm" bordered>
                         <thead>
                             <tr>
                                 <th colSpan={3}>
